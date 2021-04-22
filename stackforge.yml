@@ -1,0 +1,11 @@
+service:
+  project: sample-next-website
+  provider: aws
+  region: us-east-1
+  dns_provider: aws
+  hosted_zone: stackforge.tech
+
+hosts:
+  website:
+    type: bucket_cdn
+    url: sample-next-website.stackforge.tech

@@ -1,0 +1,35 @@
+name: CD
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-ship:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14
+    - run: npm i
+    - run: npm run build
+    - run: npm run export
+    - uses: stack-forge/forge@0.0.1
+      with:
+        stage: prod
+        config_file: stackforge.yml
+        api_key: ${{ secrets.STACKFORGE_API_KEY }}
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - uses: stack-forge/deploy@0.0.1
+      with:
+        stage: prod
+        config_file: stackforge.yml
+        api_key: ${{ secrets.STACKFORGE_API_KEY }}
+        website_files_dir: out
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
