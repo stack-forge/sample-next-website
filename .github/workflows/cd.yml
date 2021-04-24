@@ -17,7 +17,7 @@ jobs:
     - run: npm i
     - run: npm run build
     - run: npm run export
-    - uses: stack-forge/forge@v0.0.1
+    - uses: stack-forge/forge@v0.0.2
       with:
         stage: prod
         config_file: stackforge.yml
