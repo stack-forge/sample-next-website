@@ -9,3 +9,8 @@ hosts:
   website:
     type: bucket_cdn
     url: sample-next-website.stackforge.tech
+  server:
+    type: webserver_app
+    url: sample-server.stackforge.tech
+    dockerfile: ./server/Dockerfile
+    port: 8080
