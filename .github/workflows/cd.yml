@@ -16,7 +16,7 @@ jobs:
     - run: npm i
     - run: npm run build
     - run: npm run export
-    - uses: stack-forge/forge@v0.0.74
+    - uses: stack-forge/forge@v0.0.75
       id: forge
       with:
         stage: prod
